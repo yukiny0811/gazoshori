@@ -76,6 +76,7 @@ public class Processable {
     /// Channel Change
     @discardableResult
     public func RGBtoBGR() -> Processable? {
+        let start = Date().timeIntervalSince1970
         var processedColorData = self.data!
         for y in 0..<self.data!.count {
             for x in 0..<self.data![y].count {
@@ -84,6 +85,8 @@ public class Processable {
             }
         }
         self.data = processedColorData
+        let end = Date().timeIntervalSince1970
+        print("CPU || time: " + String(format: "%.5f ms", (end - start) * 1000))
         return self
     }
     
@@ -385,32 +388,6 @@ public class Processable {
     
     @discardableResult
     public func MaxPooling(rectSize: Int) -> Processable? {
-        for y in stride(from: 0, to: self.data!.count - rectSize, by: rectSize) {
-            for x in stride(from: 0, to: self.data![y].count - rectSize, by: rectSize) {
-                var rgbMax: (UInt8, UInt8, UInt8) = (0, 0, 0)
-                for smally in y..<y+rectSize {
-                    for smallx in x..<x+rectSize {
-                        if self.data![smally][smallx].r > rgbMax.0 {
-                            rgbMax.0 = self.data![smally][smallx].r
-                        } else if self.data![smally][smallx].g > rgbMax.1 {
-                            rgbMax.1 = self.data![smally][smallx].g
-                        } else if self.data![smally][smallx].b > rgbMax.2 {
-                            rgbMax.2 = self.data![smally][smallx].b
-                        }
-                    }
-                }
-                for smally in y..<y+rectSize {
-                    for smallx in x..<x+rectSize {
-                        self.data![smally][smallx] = (rgbMax.0, rgbMax.1, rgbMax.2, self.data![smally][smallx].a)
-                    }
-                }
-            }
-        }
-        return self
-    }
-    
-    @discardableResult
-    public func MedianFilter(rectSize: Int) -> Processable? {
         for y in stride(from: 0, to: self.data!.count - rectSize, by: rectSize) {
             for x in stride(from: 0, to: self.data![y].count - rectSize, by: rectSize) {
                 var rgbMax: (UInt8, UInt8, UInt8) = (0, 0, 0)

@@ -81,8 +81,8 @@
 			children = (
 				BB1B976325B84F520007E7A4 /* YuruImageProcessor.h */,
 				BB1B976425B84F520007E7A4 /* Info.plist */,
-				BB1B978825B8A3950007E7A4 /* Processable.swift */,
 				BB1B978025B852DF0007E7A4 /* YuruImageProcessor.swift */,
+				BB1B978825B8A3950007E7A4 /* Processable.swift */,
 				BB1B97A825B995A70007E7A4 /* ProcessableGraphics.swift */,
 				BB1B97AC25B998E50007E7A4 /* ProcessableGraphicsShader.metal */,
 			);
